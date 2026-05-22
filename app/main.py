@@ -26,16 +26,15 @@ class Group:
     course: int
     students: list
 
-
 def write_groups_information(groups: list[Group] | None = None) -> int:
     if groups is None:
         groups = []
-        with open("groups.pickle", "wb") as f:
-            for group in groups:
-                pickle.dump(group, f)
-                if not groups:
-                    return 0
-                return max(len(group.students) for group in groups)
+    with open("groups.pickle", "wb") as f:
+        for group in groups:
+            pickle.dump(group, f)
+    if not groups:
+        return 0
+    return max(len(group.students) for group in groups)
 
 
 def write_students_information(students: list[Student] | None = None) -> int:
