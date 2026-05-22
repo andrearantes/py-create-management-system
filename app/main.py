@@ -26,6 +26,7 @@ class Group:
     course: int
     students: list
 
+
 def write_groups_information(groups: list[Group] | None = None) -> int:
     if groups is None:
         groups = []
