@@ -27,13 +27,13 @@ class Group:
     students: list
 
 
-def write_groups_information(groups) -> Group:
+def write_groups_information(groups=None) -> Group:
     with open("groups.pickle", "wb") as f:
         pickle.dump(groups, f)
         return max(len(group.students) for group in groups)
 
 
-def write_students_information(students) -> Student:
+def write_students_information(students=None) -> Student:
     with open("students.pickle", "wb") as f:
         pickle.dump(students, f)
         return len(students)
