@@ -26,26 +26,27 @@ class Group:
     course: int
     students: list
 
-
 def write_groups_information(groups: list[Group] | None = None) -> int:
-    with open("groups.pickle", "wb") as f:
-        for group in groups:
-            pickle.dump(group, f)
-    if not groups:
-        return 0
-    return max(len(group.students) for group in groups)
+    if groups is None:
+        groups = []
+        with open("groups.pickle", "wb") as f:
+            for group in groups:
+                pickle.dump(group, f)
+                if not groups:
+                    return 0
+                return max(len(group.students) for group in groups)
 
 
 def write_students_information(students: list[Student] | None = None) -> int:
-    with open("groups.pickle", "wb") as f:
-        for group in students:
-            pickle.dump(group, f)
-    if not students:
-        return 0
-    return max(len(group.students) for group in students)
+    if students is None:
+        students = []
+    with open("students.pickle", "wb") as f:
+        for student in students:
+            pickle.dump(student, f)
+    return len(students)
 
 
-def read_groups_information() -> Group:
+def read_groups_information() -> set[str]:
     specialties = set()
     with open("groups.pickle", "rb") as f:
         while True:
@@ -57,7 +58,7 @@ def read_groups_information() -> Group:
     return specialties
 
 
-def read_students_information() -> Specialty:
+def read_students_information() -> list[Student]:
     students = []
     with open("students.pickle", "rb") as f:
         while True:
